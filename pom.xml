@@ -111,8 +111,10 @@
 </repositories>
 
 <build>
-    <sourceDirectory>src/main/scala</sourceDirectory>
-    <testSourceDirectory>src/test/scala</testSourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
+
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+
 
     <plugins>
         <plugin>
@@ -125,7 +127,11 @@
                 <target>1.8</target>
                 <encoding>UTF-8</encoding>
             </configuration>
+
+
+
         </plugin>
+
     </plugins>
 </build>
 </project>
