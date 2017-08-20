@@ -5,14 +5,14 @@
 <modelVersion>4.0.0</modelVersion>
 
 <groupId>com.zks</groupId>
-<artifactId>spark_rdd_tutorial</artifactId>
+<artifactId>spark_tutorial</artifactId>
 <version>1.0-SNAPSHOT</version>
 
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spark.version>1.6.0</spark.version>
-    <scala.version>2.10</scala.version>
-    <hadoop.version>2.6.0</hadoop.version>
+    <spark.version>2.1.1</spark.version>
+    <scala.version>2.11.8</scala.version>
+    <hadoop.version>2.7.1</hadoop.version>
 </properties>
 
 <dependencies>
@@ -111,10 +111,9 @@
 </repositories>
 
 <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
+    <sourceDirectory>src/main</sourceDirectory>
 
-    <testSourceDirectory>src/test/java</testSourceDirectory>
-
+    <testSourceDirectory>src/test</testSourceDirectory>
 
     <plugins>
         <plugin>
@@ -127,8 +126,6 @@
                 <target>1.8</target>
                 <encoding>UTF-8</encoding>
             </configuration>
-
-
 
         </plugin>
 
