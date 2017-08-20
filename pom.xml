@@ -10,7 +10,8 @@
 
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spark.version>2.1.1</spark.version>
+    <spark.version>2.10</spark.version>
+    <spark_id_version>2.1.0</spark_id_version>
     <scala.version>2.11.8</scala.version>
     <hadoop.version>2.7.1</hadoop.version>
 </properties>
@@ -18,34 +19,34 @@
 <dependencies>
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-core_${spark.version}</artifactId>
+        <version>${spark_id_version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-sql_${spark.version}</artifactId>
+        <version>${spark_id_version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-hive_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-hive_${spark.version}</artifactId>
+        <version>${spark_id_version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-streaming_${spark.version}</artifactId>
+        <version>${spark_id_version}</version>
     </dependency>
 
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming-kafka_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-streaming-kafka_${spark.version}</artifactId>
+        <version>1.3.0</version>
     </dependency>
     <dependency>
         <groupId>org.apache.spark</groupId>
-        <artifactId>spark-mllib_${scala.version}</artifactId>
-        <version>${spark.version}</version>
+        <artifactId>spark-mllib_${spark.version}</artifactId>
+        <version>${spark_id_version}</version>
     </dependency>
     <dependency>
         <groupId>mysql</groupId>
