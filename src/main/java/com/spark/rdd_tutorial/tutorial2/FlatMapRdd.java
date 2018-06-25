@@ -1,5 +1,6 @@
 package com.spark.rdd_tutorial.tutorial2;
 
+import com.spark.rdd.tutorial.util.MyIterator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -21,9 +22,10 @@ public class FlatMapRdd {
         JavaRDD<String> lines = jsc.textFile("D:\\git\\spark_tutorial\\src\\main\\resources\\filter_sample.txt");
         JavaRDD<String> flatMapRDD = lines.flatMap(new FlatMapFunction<String, String>() {
             @Override
-            public Iterator<String> call(String s) throws Exception {
+            public MyIterator<String> call(String s) throws Exception {
                 String[] split = s.split("\\s+");
-                return Arrays.asList(split).iterator();
+                MyIterator myIterator = new MyIterator(Arrays.asList(split));
+                return myIterator;
             }
         });
         //循环打印
