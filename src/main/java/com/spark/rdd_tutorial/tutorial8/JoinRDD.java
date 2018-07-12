@@ -4,6 +4,7 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.Optional;
+import org.apache.spark.api.java.function.VoidFunction;
 import scala.Tuple2;
 import java.util.Arrays;
 import java.util.Map;
@@ -27,41 +28,40 @@ public class JoinRDD {
 
         //join
         JavaPairRDD<Integer, Tuple2<Integer, Integer>> joinRDD =  rdd.join(other);
-        //fullOutJoin
-        JavaPairRDD<Integer, Tuple2<Optional<Integer>, Optional<Integer>>> fullOutJoinRDD = rdd.fullOuterJoin(other);
-        //leftOuterJoin
-        JavaPairRDD<Integer, Tuple2<Integer, Optional<Integer>>> leftOutJoinRDD = rdd.leftOuterJoin(other);
-
-        //rightOutJoin
-        JavaPairRDD<Integer, Tuple2<Optional<Integer>, Integer>> rightOutJoinRDD = rdd.rightOuterJoin(other);
-        //输出看效果
-        Map<Integer, Integer> subMap = subRDD.collectAsMap();
-        System.out.println("-------------subRDD-------------");
-        for (Integer key : subMap.keySet()) {
-            System.out.println("subRDD: "+key+", "+subMap.get(key));
-        }
-        Map<Integer, Tuple2<Integer, Integer>> joinMap = joinRDD.collectAsMap();
         System.out.println("-------------joinRDD-------------");
-        for (Integer key : joinMap.keySet()) {
-            System.out.println("join: "+key+", Tuple("+joinMap.get(key)._1+","+joinMap.get(key)._2+")");
-        }
-        Map<Integer, Tuple2<Optional<Integer>, Optional<Integer>>> fullOutJoinMap = fullOutJoinRDD.collectAsMap();
+        joinRDD.foreach(new VoidFunction<Tuple2<Integer, Tuple2<Integer, Integer>>>() {
+            @Override
+            public void call(Tuple2<Integer, Tuple2<Integer, Integer>> tptp) throws Exception {
+                System.out.println("key: "+tptp._1+", value: "+tptp._2._1+","+tptp._2._2);
+            }
+        });
+
         System.out.println("-------------fullOutJoinRDD-------------");
-        for (Integer key : fullOutJoinMap.keySet()) {
-            System.out.println("fullOutJoinRDD: "+key+", Tuple("+fullOutJoinMap.get(key)._1+","+fullOutJoinMap.get(key)._2+")");
-        }
+        JavaPairRDD<Integer, Tuple2<Optional<Integer>, Optional<Integer>>> fullOutJoinRDD = rdd.fullOuterJoin(other);
+        fullOutJoinRDD.foreach(new VoidFunction<Tuple2<Integer, Tuple2<Optional<Integer>, Optional<Integer>>>>() {
+            @Override
+            public void call(Tuple2<Integer, Tuple2<Optional<Integer>, Optional<Integer>>> tptp2) throws Exception {
+                System.out.println("key: "+ tptp2._1+" value: "+tptp2._2._1+", "+tptp2._2._2);
+            }
+        });
 
-        Map<Integer, Tuple2<Integer, Optional<Integer>>> leftOutJoinMap = leftOutJoinRDD.collectAsMap();
         System.out.println("-------------leftOutJoinRDD-------------");
-        for (Integer key : leftOutJoinMap.keySet()) {
-            System.out.println("leftOutJoinRDD: "+key+", Tuple("+leftOutJoinMap.get(key)._1+","+leftOutJoinMap.get(key)._2+")");
-        }
+        JavaPairRDD<Integer, Tuple2<Integer, Optional<Integer>>> leftOutJoinRDD = rdd.leftOuterJoin(other);
+        leftOutJoinRDD.foreach(new VoidFunction<Tuple2<Integer, Tuple2<Integer, Optional<Integer>>>>() {
+            @Override
+            public void call(Tuple2<Integer, Tuple2<Integer, Optional<Integer>>> tptp2) throws Exception {
+                System.out.println("key: "+tptp2._1+" value:  "+tptp2._2._1+", "+tptp2._2._2);
+            }
+        });
 
-        Map<Integer, Tuple2<Optional<Integer>, Integer>> rightOutJoinMap = rightOutJoinRDD.collectAsMap();
         System.out.println("-------------rightOutJoinRDD-------------");
-        for (Integer key : rightOutJoinMap.keySet()) {
-            System.out.println("rightOutJoinRDD: "+key+", Tuple("+rightOutJoinMap.get(key)._1+","+rightOutJoinMap.get(key)._2+")");
-        }
+        JavaPairRDD<Integer, Tuple2<Optional<Integer>, Integer>> rightOutJoinRDD = rdd.rightOuterJoin(other);
+        rightOutJoinRDD.foreach(new VoidFunction<Tuple2<Integer, Tuple2<Optional<Integer>, Integer>>>() {
+            @Override
+            public void call(Tuple2<Integer, Tuple2<Optional<Integer>, Integer>> tptp2) throws Exception {
+                System.out.println("key: "+tptp2._1+"value:  "+tptp2._2._1+", "+tptp2._2._2);
+            }
+        });
 
     }
 }

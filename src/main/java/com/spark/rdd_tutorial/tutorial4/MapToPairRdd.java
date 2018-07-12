@@ -33,7 +33,5 @@ public class MapToPairRdd {
                 System.out.println("key: "+tp._1+" value: "+tp._2);
             }
         });
-
-
     }
 }
